@@ -18,7 +18,7 @@ const useSignIn = () => {
       setAuthenticated(true);
       setUser(user.user);
       setIsLoading(false);
-      navigate("/painel");
+      navigate("/");
     } catch (error: any) {
       console.log(error.response.data.message);
     }

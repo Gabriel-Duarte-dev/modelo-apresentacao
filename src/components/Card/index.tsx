@@ -48,8 +48,22 @@ export function Card({ src, alt, pos }: CardProps) {
           diam neque ut erat. Vestibulum suscipit varius urna ut dignissim.
         </Text>
 
-        <Box w="2px" h="70px" bg="#0CABA8" pos="absolute" bottom={3} left={3} />
-        <Box w="70px" h="2px" bg="#0CABA8" pos="absolute" bottom={3} left={3} />
+        <Box
+          w="2px"
+          h="70px"
+          bg="aqua.primary-md"
+          pos="absolute"
+          bottom={3}
+          left={3}
+        />
+        <Box
+          w="70px"
+          h="2px"
+          bg="aqua.primary-md"
+          pos="absolute"
+          bottom={3}
+          left={3}
+        />
       </Flex>
     </Flex>
   );

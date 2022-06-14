@@ -73,7 +73,13 @@ function Login() {
             />
           </FormControl>
 
-          <Button w="full" colorScheme="cyan" color="white" type="submit">
+          <Button
+            w="full"
+            isLoading={isLoading}
+            colorScheme="cyan"
+            color="white"
+            type="submit"
+          >
             ENTRAR
           </Button>
         </form>

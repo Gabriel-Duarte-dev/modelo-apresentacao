@@ -20,7 +20,7 @@ export function FormContact() {
       borderRadius={4}
       mr={{ base: 0, lg: "40px" }}
     >
-      <Heading color="#008F8C" fontWeight="medium" fontSize={24} mb={8}>
+      <Heading color="aqua.secondary" fontWeight="medium" fontSize={24} mb={8}>
         Entre em contato
       </Heading>
 
@@ -32,8 +32,8 @@ export function FormContact() {
             name="name"
             type="text"
             placeholder="Nome..."
-            colorScheme="cyan"
             borderColor="gray.300"
+            focusBorderColor="aqua.primary"
           />
         </FormControl>
 
@@ -44,8 +44,8 @@ export function FormContact() {
             name="email"
             type="email"
             placeholder="E-mail..."
-            colorScheme="cyan"
             borderColor="gray.300"
+            focusBorderColor="aqua.primary"
           />
         </FormControl>
 
@@ -56,36 +56,38 @@ export function FormContact() {
             name="phone"
             type="number"
             placeholder="Telefone..."
-            colorScheme="cyan"
             borderColor="gray.300"
+            focusBorderColor="aqua.primary"
           />
         </FormControl>
 
         <FormControl mb={6}>
           <FormLabel htmlFor="mensagem">Deixe sua mensagem</FormLabel>
           <Textarea
+            isRequired
             id="mensagem"
             name="msg"
             placeholder="Deixe sua mensagem..."
-            colorScheme="cyan"
             borderColor="gray.300"
+            focusBorderColor="aqua.primary"
             resize="none"
           />
         </FormControl>
 
         <Button
           w="100%"
-          bg="#0FC2C0"
-          _hover={{ bg: "#0CABA8" }}
+          bg="aqua.primary"
+          _hover={{ bg: "aqua.primary-md" }}
           _active={{ border: "none" }}
           _focus={{
             outline: "none",
             ring: "2px",
             ringOffset: "2px",
             ringOffsetColor: "#fff",
-            ringColor: "#0CABA8",
+            ringColor: "aqua.primary-md",
           }}
           color="white"
+          type="submit"
         >
           ENVIAR
         </Button>

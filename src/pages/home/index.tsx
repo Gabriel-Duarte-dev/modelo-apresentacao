@@ -1,4 +1,13 @@
-import { Text, Box, Flex, Center, Img, Heading } from "@chakra-ui/react";
+import {
+  Text,
+  Box,
+  Flex,
+  Center,
+  Img,
+  Heading,
+  Link,
+  Button,
+} from "@chakra-ui/react";
 import { Carousel } from "../../components/Carousel";
 import { FormContact } from "../../components/FormContact";
 import { Header } from "../../components/Header";
@@ -6,6 +15,7 @@ import { Header } from "../../components/Header";
 import pepleoImg from "../../../images/pessoa.png";
 import { Card } from "../../components/Card";
 import { Footer } from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const images = [
   "paisagem de uma praia com rochas",
@@ -14,6 +24,7 @@ const images = [
 ];
 
 export function Home() {
+  const navigate = useNavigate();
   return (
     <Box w="100%" h="100%">
       <Header />
@@ -58,7 +69,7 @@ export function Home() {
           </Box>
 
           <Flex
-            bg="#008F8C"
+            bg="aqua.secondary"
             w={{ base: "100%", lg: "60%" }}
             h={{ base: "auto", lg: "100%" }}
             clipPath={{
@@ -74,60 +85,68 @@ export function Home() {
           </Flex>
         </Flex>
 
-        <Flex
-          as="section"
-          w="100%"
-          mt={20}
-          pos="relative"
-          direction="column"
-          align="center"
-        >
+        <Center as="section" w="100%" mt={20} pos="relative">
           <Flex
             direction="column"
-            ml={10}
-            pos="absolute"
-            alignSelf="flex-start"
+            w="100%"
+            maxW="1070px"
+            align="center"
+            pos="relative"
           >
-            <Heading color="#008F8C" fontWeight="bold" mb="4px">
-              Lorem ipsum
-            </Heading>
-            <Box as="span" w="70%" h="3px" bg="#008F8C" />
-          </Flex>
+            <Flex
+              direction="column"
+              alignSelf={{ base: "center", lg: "flex-start" }}
+            >
+              <Heading color="aqua.secondary" fontWeight="bold" mb="4px">
+                Lorem ipsum
+              </Heading>
+              <Box as="span" w="70%" h="3px" bg="aqua.secondary" />
+            </Flex>
 
-          <Flex
-            maxW="1070px"
-            justify={{ base: "center", lg: "space-between" }}
-            wrap="wrap"
-            gap={8}
-            mt={40}
-          >
-            {images.map((img, index) => (
-              <Card
-                key={index}
-                src={`../../../images/img${index + 1}.jpg`}
-                alt={img}
-                pos={index}
-              />
-            ))}
+            <Flex
+              maxW="1070px"
+              justify={{ base: "center", xl: "space-between" }}
+              wrap="wrap"
+              gap={8}
+              mt="40px"
+            >
+              {images.map((img, index) => (
+                <Card
+                  key={index}
+                  src={`../../../images/img${index + 1}.jpg`}
+                  alt={img}
+                  pos={index}
+                />
+              ))}
+            </Flex>
+            <Flex
+              maxW="1070px"
+              justify={{ base: "center", xl: "space-between" }}
+              wrap="wrap"
+              gap={8}
+              mt={8}
+            >
+              {images.map((img, index) => (
+                <Card
+                  key={index}
+                  src={`../../../images/img${index + 1}.jpg`}
+                  alt={img}
+                  pos={index}
+                />
+              ))}
+            </Flex>
+            <Button
+              variant="outline"
+              borderColor="aqua.primary"
+              color="aqua.primary"
+              mt={8}
+              mb={12}
+              onClick={() => navigate("/services")}
+            >
+              VER MAIS
+            </Button>
           </Flex>
-          <Flex
-            maxW="1070px"
-            justify={{ base: "center", lg: "space-between" }}
-            wrap="wrap"
-            gap={8}
-            mt={8}
-            mb={12}
-          >
-            {images.map((img, index) => (
-              <Card
-                key={index}
-                src={`../../../images/img${index + 1}.jpg`}
-                alt={img}
-                pos={index}
-              />
-            ))}
-          </Flex>
-        </Flex>
+        </Center>
       </Box>
       <Footer />
     </Box>

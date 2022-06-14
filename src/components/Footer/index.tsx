@@ -21,9 +21,9 @@ export function Footer() {
       justify="space-between"
       w="100%"
       p={8}
-      bg="#023535"
+      bg="aqua.strong"
     >
-      <Circle size="150px" bg="#015958" />
+      <Circle size="150px" bg="aqua.strong-md" />
 
       <List mt={{ base: 10, md: 0 }} spacing={4}>
         <ListItem color="white" fontSize={20}>

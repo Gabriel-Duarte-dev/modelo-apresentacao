@@ -16,6 +16,21 @@ import { DrawerMenu } from "../DrawerMenu";
 import { ListItem } from "../ListItem";
 import { HiOutlineMenu } from "react-icons/hi";
 
+export const menuItensTypes = {
+  Home: {
+    to: "/",
+  },
+  Serviços: {
+    to: "/services",
+  },
+  Sobre: {
+    to: "/about",
+  },
+  Contato: {
+    to: "/contact",
+  },
+};
+
 export function Header() {
   const { authenticated } = useContext(MainContext);
   const { signOut } = useSignOut();
@@ -27,7 +42,7 @@ export function Header() {
       h="100px"
       justify="space-between"
       align="center"
-      bg="#0FC2C0"
+      bg="aqua.primary"
       color="white"
       pr={4}
       pl={4}
@@ -38,7 +53,7 @@ export function Header() {
     >
       <Link to="/">
         <Flex align="center">
-          <Circle size="80px" bg="#015958" />
+          <Circle size="80px" bg="aqua.strong-md" />
           <Text color="white" fontSize={26} fontWeight="bold" pl={4}>
             Your Name
           </Text>
@@ -51,37 +66,36 @@ export function Header() {
         flexDirection="row"
         gap={6}
         cursor="pointer"
-        mr={20}
+        mr={4}
       >
-        {[
-          "Home",
-          "Quem somos",
-          "Serviços",
-          "Portifólio",
-          "Contato",
-          "Blog",
-        ].map((item, index) => (
-          <ListItem key={index} item={item} />
+        {Object.entries(menuItensTypes).map(([key, item], index) => (
+          <ListItem key={index} menuItem={key} link={item.to} />
         ))}
+        {authenticated && (
+          <Button
+            variant="outline"
+            size="sm"
+            _hover={{ bg: "none" }}
+            _active={{ bg: "aqua.primary-md", borderColor: "aqua.primary-md" }}
+            onClick={signOut}
+          >
+            SignOut
+          </Button>
+        )}
       </List>
 
       <IconButton
         display={{ base: "inherit", lg: "none" }}
         aria-label="Menu"
-        bg="#023535"
+        bg="aqua.strong-md"
         color="white"
-        _hover={{ bg: "#023535" }}
+        _hover={{ bg: "aqua.strong-md" }}
+        _active={{ bg: "aqua.secondary" }}
         size="md"
         icon={<HiOutlineMenu />}
         onClick={onOpen}
       />
       <DrawerMenu isOpen={isOpen} onClose={onClose} />
-
-      {authenticated && (
-        <Button onClick={signOut} colorScheme="green">
-          SignOut
-        </Button>
-      )}
     </Flex>
   );
 }

@@ -1,11 +1,14 @@
 import { ListItem as Item, Text, Box } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type ListItemProps = {
-  item: string;
+  menuItem: string;
+  link: string;
 };
 
-export function ListItem({ item }: ListItemProps) {
+export function ListItem({ menuItem, link }: ListItemProps) {
+  const navigate = useNavigate();
   const [hover, setHover] = useState(false);
 
   const over = () => {
@@ -16,9 +19,14 @@ export function ListItem({ item }: ListItemProps) {
     setHover(false);
   };
   return (
-    <Item color="#fff" display="flex" flexDirection="column">
+    <Item
+      color="#fff"
+      display="flex"
+      flexDirection="column"
+      onClick={() => navigate(link)}
+    >
       <Text fontWeight={500} fontSize={22} onMouseOver={over} onMouseOut={out}>
-        {item}
+        {menuItem}
       </Text>
       <Box
         as="span"

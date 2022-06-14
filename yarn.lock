@@ -944,6 +944,10 @@ balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
 
+bezier-easing@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
+
 big-integer@^1.6.16:
   version "1.6.51"
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.51.tgz#0df92a5d9880560d3ff2d5fd20245c889d130686"
@@ -1439,6 +1443,12 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
+parallax-controller@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/parallax-controller/-/parallax-controller-1.5.0.tgz#324859f336566f114b8c08212b8454b6ad17de0f"
+  dependencies:
+    bezier-easing "^2.1.0"
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -1576,6 +1586,12 @@ react-router@6.3.0:
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.3.0.tgz#3970cc64b4cb4eae0c1ea5203a80334fdd175557"
   dependencies:
     history "^5.2.0"
+
+react-scroll-parallax@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-scroll-parallax/-/react-scroll-parallax-3.2.0.tgz#fad93571a274af796de3db344e358d1db67088b7"
+  dependencies:
+    parallax-controller "^1.5.0"
 
 react-style-singleton@^2.2.1:
   version "2.2.1"
