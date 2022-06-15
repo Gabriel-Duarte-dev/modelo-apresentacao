@@ -29,6 +29,9 @@ export const menuItensTypes = {
   Contato: {
     to: "/contact",
   },
+  Blog: {
+    to: "/blog",
+  },
 };
 
 export function Header() {

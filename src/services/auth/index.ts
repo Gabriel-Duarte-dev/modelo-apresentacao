@@ -22,7 +22,7 @@ const login = async ({
   const { data } = await api.post("/auth/login", {
     email,
     password,
-    site: "https://www.globalmidia.digital/",
+    site: "globalmidia.digital",
   });
 
   return data;

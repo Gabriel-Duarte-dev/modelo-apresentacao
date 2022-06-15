@@ -1,0 +1,88 @@
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Img,
+  Text,
+} from "@chakra-ui/react";
+import { BiMessage } from "react-icons/bi";
+import { BsArrowRight } from "react-icons/bs";
+
+interface PostProps {
+  title: string;
+  description: string;
+  dateHour: string;
+  image: string;
+}
+
+export function Post({ title, description, dateHour, image }: PostProps) {
+  return (
+    <Flex
+      direction="column"
+      w="100%"
+      maxW="500px"
+      bg="white"
+      boxShadow="lg"
+      pos="relative"
+    >
+      <Box w="100%" h="420px" borderTopRadius={4}>
+        <Img
+          src={image}
+          w="100%"
+          h="100%"
+          objectFit="cover"
+          borderTopRadius={4}
+        />
+      </Box>
+      <Box w="100%" p="16px" borderBottomRadius={4} pos="relative" mb="40px">
+        <Heading color="aqua.secondary" mb={4}>
+          {title}
+        </Heading>
+        <Text fontSize={13} fontWeight="light" textOverflow="ellipsis">
+          {description.length > 405
+            ? description.substring(0, 405) + "..."
+            : description}
+        </Text>
+      </Box>
+      <Flex
+        align="center"
+        justify="space-between"
+        w="100%"
+        pos="absolute"
+        bottom="8px"
+        p="0 16px"
+      >
+        <HStack align="center">
+          <Box pos="relative" mr={4}>
+            <Text
+              as="span"
+              fontSize={14}
+              ml="5px"
+              color="#7c7c7c"
+              pos="absolute"
+              top="-18px"
+              right="-5px"
+            >
+              8
+            </Text>
+            <BiMessage color="#7c7c7c" size="24px" />
+          </Box>
+          <Text fontWeight="light" fontSize={14} color="#7c7c7c">
+            {dateHour.split("T")[0].split("-").reverse().join("/")}
+          </Text>
+        </HStack>
+        <Button
+          variant="link"
+          color="aqua.secondary"
+          rightIcon={<BsArrowRight />}
+          size="sm"
+          _active={{ color: "none" }}
+        >
+          Ver mais
+        </Button>
+      </Flex>
+    </Flex>
+  );
+}

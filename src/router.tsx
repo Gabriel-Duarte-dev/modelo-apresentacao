@@ -14,6 +14,7 @@ import { Services } from "./pages/servicos";
 import { About } from "./pages/sobre";
 import { Contact } from "./pages/contato";
 import ScrollToTop from "./utils/ScrollToTop";
+import { Blog } from "./pages/blog";
 
 type PrivateRouteProps = {
   component: React.FC;
@@ -36,6 +37,7 @@ const Router = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/painel" element={<PrivateRoute component={Painel} />} />
       </Routes>
