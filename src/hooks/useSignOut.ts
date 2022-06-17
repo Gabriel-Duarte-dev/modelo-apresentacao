@@ -1,11 +1,12 @@
 import { useContext, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MainContext from "../context";
 import { api } from "../services/api";
 
 const useSignOut = () => {
   const { setAuthenticated, setUser } = useContext(MainContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const signOut = () => {
     setAuthenticated(false);
@@ -20,7 +21,7 @@ const useSignOut = () => {
       return req;
     });
 
-    navigate("/login");
+    navigate(location.pathname);
   };
 
   return { signOut };

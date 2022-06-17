@@ -5,19 +5,31 @@ export interface PostDTO {
   createdAt: string;
   updatedAt: string;
   title: string;
-  content: string;
+  content: Content[];
   image: string;
   userId: string;
   comments?: Comments[];
 }
 
-export interface Comments {
+export type Content = {
+  id?: string;
+  subtitle: string;
+  paragraph: string;
+};
+
+export type Comments = {
   id: string;
   createdAt: string;
   updatedAt: string;
   comment: string;
   blogId: string;
-}
+};
+
+export type CreatePostDTO = {
+  title: string;
+  content: Content[];
+  image: any;
+};
 
 const getPosts = async () => {
   const { data } = await api.get("/blog/posts/globalmidia.digital");
@@ -25,4 +37,14 @@ const getPosts = async () => {
   return data;
 };
 
-export { getPosts };
+const addPosts = async ({ title, content, image }: CreatePostDTO) => {
+  const { data } = await api.post("/blog/newPost", {
+    title,
+    content,
+    image,
+  });
+
+  return data;
+};
+
+export { getPosts, addPosts };

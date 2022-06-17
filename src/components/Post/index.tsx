@@ -9,15 +9,19 @@ import {
 } from "@chakra-ui/react";
 import { BiMessage } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 interface PostProps {
+  id: string;
   title: string;
   description: string;
   dateHour: string;
   image: string;
 }
 
-export function Post({ title, description, dateHour, image }: PostProps) {
+export function Post({ id, title, description, dateHour, image }: PostProps) {
+  const navigate = useNavigate();
+
   return (
     <Flex
       direction="column"
@@ -79,6 +83,7 @@ export function Post({ title, description, dateHour, image }: PostProps) {
           rightIcon={<BsArrowRight />}
           size="sm"
           _active={{ color: "none" }}
+          onClick={() => navigate(`/blog/${id}`)}
         >
           Ver mais
         </Button>

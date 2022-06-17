@@ -15,6 +15,7 @@ import { About } from "./pages/sobre";
 import { Contact } from "./pages/contato";
 import ScrollToTop from "./utils/ScrollToTop";
 import { Blog } from "./pages/blog";
+import { BlogComplete } from "./pages/blog/blogComplete";
 
 type PrivateRouteProps = {
   component: React.FC;
@@ -38,6 +39,7 @@ const Router = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:blogId" element={<BlogComplete />} />
         <Route path="/login" element={<Login />} />
         <Route path="/painel" element={<PrivateRoute component={Painel} />} />
       </Routes>
