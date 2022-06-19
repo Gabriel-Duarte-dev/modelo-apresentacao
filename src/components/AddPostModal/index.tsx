@@ -16,11 +16,12 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { BsImage } from "react-icons/bs";
-import { AiOutlinePlus } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { Content } from "../../services/blog";
 import { usePost } from "../../hooks/usePost";
 import { usePosts } from "../../hooks/usePosts";
+import { AiOutlinePlus } from "react-icons/ai";
+import { IoMdTrash } from "react-icons/io";
 
 interface AddPostModalProps {
   isOpen: boolean;
@@ -74,7 +75,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="outside">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader color="aqua.secondary" textTransform="uppercase">
@@ -115,25 +116,22 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <Box
-            w="100%"
-            overflowY="auto"
-            maxH="152px"
-            css={{
-              "&::-webkit-scrollbar": {
-                width: "6px",
-              },
-              "&::-webkit-scrollbar-track": {
-                width: "6px",
-              },
-              "&::-webkit-scrollbar-thumb": {
-                background: "#e0e0e0",
-                borderRadius: "24px",
-              },
-            }}
-          >
+          <Box w="100%">
             {content.map((value, index) => (
-              <div key={index}>
+              <Box key={index} pos="relative">
+                <Box
+                  as="span"
+                  pos="absolute"
+                  top={0}
+                  right={0}
+                  cursor="pointer"
+                  onClick={() => {
+                    if (content.length > 1)
+                      setContent(content.filter((val, pos) => pos != index));
+                  }}
+                >
+                  <IoMdTrash color="#888" size="18px" cursor="pointer" />
+                </Box>
                 <Input
                   type="text"
                   placeholder="Subtítulo (opcional)"
@@ -141,6 +139,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                   focusBorderColor="aqua.primary"
                   bg="none"
                   mb={4}
+                  mt="10px"
                   onChange={(e) => {
                     const newContent = [...content];
                     content[index].subtitle = e.target.value;
@@ -159,7 +158,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                   }}
                   value={value.paragraph}
                 />
-              </div>
+              </Box>
             ))}
           </Box>
           <Center w="100%">

@@ -34,18 +34,20 @@ export function BlogComplete() {
             <Heading alignSelf="flex-start" color="aqua.secondary" mb={8}>
               {filterPost?.title}
             </Heading>
-            {filterPost?.content.map((content) => (
-              <Box key={content.id} mb={4}>
-                {!!content.subtitle && (
-                  <Text fontWeight="bold" fontSize={16}>
-                    {content.subtitle}
+            <Box w="100%" alignSelf="flex-start">
+              {filterPost?.content.map((content) => (
+                <Box key={content.id} mb={4}>
+                  {!!content.subtitle && (
+                    <Text fontWeight="bold" fontSize={16}>
+                      {content.subtitle}
+                    </Text>
+                  )}
+                  <Text fontWeight="regular" fontSize={14}>
+                    {content.paragraph}
                   </Text>
-                )}
-                <Text fontWeight="regular" fontSize={14}>
-                  {content.paragraph}
-                </Text>
-              </Box>
-            ))}
+                </Box>
+              ))}
+            </Box>
             <Box w="100%" alignSelf="flex-start" mb={80} mt={20}>
               <Text fontWeight="bold" fontSize={16} mb={20}>
                 {`${filterPost?.comments?.length ?? 0} comentários`}

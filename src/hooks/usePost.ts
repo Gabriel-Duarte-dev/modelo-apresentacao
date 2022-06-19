@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useMutation } from "react-query";
 import { addPosts, CreatePostDTO, PostDTO } from "../services/blog";
 
 const usePost = () => {

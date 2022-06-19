@@ -1,6 +1,7 @@
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainContext from "../context";
+import { api } from "../services/api";
 import { login, LoginInputDTO } from "../services/auth";
 
 const useSignIn = () => {
@@ -17,6 +18,12 @@ const useSignIn = () => {
       localStorage.setItem("user", JSON.stringify(user.user));
       setAuthenticated(true);
       setUser(user.user);
+      api.interceptors.request.use(async (req) => {
+        if (req.headers) {
+          req.headers.Authorization = `Bearer ${user.token}`;
+        }
+        return req;
+      });
       setIsLoading(false);
       navigate("/");
     } catch (error: any) {

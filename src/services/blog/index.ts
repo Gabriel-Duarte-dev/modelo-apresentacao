@@ -32,7 +32,7 @@ export type CreatePostDTO = {
 };
 
 const getPosts = async () => {
-  const { data } = await api.get("/blog/posts/globalmidia.digital");
+  const { data } = await api.get("/blog/posts/site.modelo1");
 
   return data;
 };
