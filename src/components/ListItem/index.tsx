@@ -19,22 +19,11 @@ export function ListItem({ menuItem, link }: ListItemProps) {
     setHover(false);
   };
   return (
-    <Item
-      color="#fff"
-      display="flex"
-      flexDirection="column"
-      onClick={() => navigate(link)}
-    >
+    <Item color="#fff" display="flex" flexDirection="column" onClick={() => navigate(link)}>
       <Text fontWeight={500} fontSize={22} onMouseOver={over} onMouseOut={out}>
         {menuItem}
       </Text>
-      <Box
-        as="span"
-        w={hover ? "100%" : 0}
-        h="3px"
-        bg="white"
-        transition="0.3s"
-      ></Box>
+      <Box as="span" w={hover ? "100%" : 0} h="3px" bg="white" transition="0.3s"></Box>
     </Item>
   );
 }

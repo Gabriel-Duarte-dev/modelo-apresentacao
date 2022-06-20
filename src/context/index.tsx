@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { UserDTO } from "../services/auth";
 
@@ -48,13 +41,7 @@ const MainContextProvider = ({ children }: MainContextProviderProps) => {
       });
     }
   }, []);
-  return (
-    <MainContext.Provider
-      value={{ user, setUser, authenticated, setAuthenticated }}
-    >
-      {children}
-    </MainContext.Provider>
-  );
+  return <MainContext.Provider value={{ user, setUser, authenticated, setAuthenticated }}>{children}</MainContext.Provider>;
 };
 
 export { MainContextProvider };

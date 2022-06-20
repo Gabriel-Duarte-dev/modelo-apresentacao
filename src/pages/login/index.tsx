@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Center, Flex, FormControl, FormLabel, Heading, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useSignIn } from "../../hooks/useSignIn";
 
@@ -28,25 +18,12 @@ function Login() {
 
   return (
     <Center w="100vw" h="100vh">
-      <Flex
-        w={400}
-        h={500}
-        direction="column"
-        justify="center"
-        align="center"
-        bg="white"
-        boxShadow="lg"
-        borderRadius={7}
-        p={4}
-      >
+      <Flex w={400} h={500} direction="column" justify="center" align="center" bg="white" boxShadow="lg" borderRadius={7} p={4}>
         <Heading color="#42C2FF" textDecoration="underline" mb={10}>
           LOGIN
         </Heading>
 
-        <form
-          style={{ width: "90%" }}
-          onSubmit={(e) => onSubmit(formFields, e)}
-        >
+        <form style={{ width: "90%" }} onSubmit={(e) => onSubmit(formFields, e)}>
           <FormControl isRequired mb={4}>
             <FormLabel htmlFor="email">E-mail</FormLabel>
             <Input
@@ -73,13 +50,7 @@ function Login() {
             />
           </FormControl>
 
-          <Button
-            w="full"
-            isLoading={isLoading}
-            colorScheme="cyan"
-            color="white"
-            type="submit"
-          >
+          <Button w="full" isLoading={isLoading} colorScheme="cyan" color="white" type="submit">
             ENTRAR
           </Button>
         </form>

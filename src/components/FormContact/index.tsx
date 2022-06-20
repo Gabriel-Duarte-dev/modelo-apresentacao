@@ -1,25 +1,8 @@
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
-  Textarea,
-} from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Heading, Input, Textarea } from "@chakra-ui/react";
 
 export function FormContact() {
   return (
-    <Flex
-      as="article"
-      bg="white"
-      direction="column"
-      align="center"
-      p={4}
-      w="350px"
-      borderRadius={4}
-      mr={{ base: 0, lg: "40px" }}
-    >
+    <Flex as="article" bg="white" direction="column" align="center" p={4} w="350px" borderRadius={4} mr={{ base: 0, lg: "40px" }}>
       <Heading color="aqua.secondary" fontWeight="medium" fontSize={24} mb={8}>
         Entre em contato
       </Heading>
@@ -27,14 +10,7 @@ export function FormContact() {
       <form style={{ width: "90%" }}>
         <FormControl isRequired mb={6}>
           <FormLabel htmlFor="name">Nome</FormLabel>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Nome..."
-            borderColor="gray.300"
-            focusBorderColor="aqua.primary"
-          />
+          <Input id="name" name="name" type="text" placeholder="Nome..." borderColor="gray.300" focusBorderColor="aqua.primary" />
         </FormControl>
 
         <FormControl isRequired mb={6}>
@@ -87,8 +63,7 @@ export function FormContact() {
             ringColor: "aqua.primary-md",
           }}
           color="white"
-          type="submit"
-        >
+          type="submit">
           ENVIAR
         </Button>
       </form>

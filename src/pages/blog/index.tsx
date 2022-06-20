@@ -1,51 +1,39 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Input,
-  SimpleGrid,
-  Spinner,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Input, ScaleFade, SimpleGrid, Spinner, Text, useDisclosure } from "@chakra-ui/react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AiOutlineSearch } from "react-icons/ai";
 import { theme } from "../../styles/theme";
 import { Post } from "../../components/Post";
 import { usePosts } from "../../hooks/usePosts";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { AddPostModal } from "../../components/AddPostModal";
 import MainContext from "../../context";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Blog() {
   const [search, setSearch] = useState("");
   const { authenticated } = useContext(MainContext);
-  const { posts, isLoading } = usePosts();
+  const { posts, isLoading, refetch } = usePosts();
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const postFilter = useMemo(() => {
     if (!!search) {
-      return (
-        posts?.filter((value) =>
-          value.title.toLocaleLowerCase().includes(search.toLowerCase())
-        ) ?? []
-      );
+      return posts?.filter((value) => value.title.toLocaleLowerCase().includes(search.toLowerCase())) ?? [];
     }
 
     return posts ?? [];
   }, [posts, search]);
 
+  const MotionSimpleGrid = motion(SimpleGrid);
   const renderPosts = useMemo(
     () => (
-      <SimpleGrid
+      <MotionSimpleGrid
         columns={{ base: 1, md: 2, xl: 3 }}
         gap={6}
         mb="160px"
         mr={{ base: "24px", xl: "16px" }}
         ml={{ base: "24px", xl: "16px" }}
-      >
+        layout>
         {postFilter.length > 0 &&
           postFilter.map((post, index) => (
             <Post
@@ -57,9 +45,9 @@ export function Blog() {
               image={post.image}
             />
           ))}
-      </SimpleGrid>
+      </MotionSimpleGrid>
     ),
-    [posts, search]
+    [posts, search],
   );
 
   const notFound = useMemo(
@@ -68,52 +56,42 @@ export function Blog() {
         Sem registros para sua busca...
       </Text>
     ),
-    [postFilter]
+    [postFilter],
   );
+
+  const handleCloseModal = () => {
+    refetch();
+    onClose();
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [handleCloseModal]);
   return (
     <>
       <Header />
       <Box w="100%" h="calc(100% - 100px)" mt="100px" pos="relative">
-        {authenticated && (
-          <Button
-            variant="outline"
-            color="aqua.primary"
-            borderColor="aqua.primary"
-            pos="absolute"
-            top="0"
-            right={10}
-            zIndex={1}
-            onClick={onOpen}
-          >
-            Novo Post
-          </Button>
-        )}
-
-        {isOpen && <AddPostModal isOpen={isOpen} onClose={onClose} />}
+        <ScaleFade in={isOpen}>
+          <AddPostModal isOpen={isOpen} onClose={handleCloseModal} />
+        </ScaleFade>
 
         <Flex
+          direction={{ base: "column", md: "row" }}
           align="center"
           justify="center"
           w="100%"
-          h="40px"
           pos="relative"
           mt="150px"
-          mb="100px"
-        >
+          mb="100px">
           <Flex
             align="center"
             w="100%"
-            maxW="400px"
-            h="100%"
+            maxW={{ base: "320px", sm: "400px" }}
+            h="40px"
             bg="none"
             boxShadow="0 0 5px 0 rgba(0,0,0,0.25)"
-            borderRadius={4}
-          >
-            <AiOutlineSearch
-              style={{ marginLeft: "10px" }}
-              size="25px"
-              color={theme.colors.aqua.secondary}
-            />
+            borderRadius={4}>
+            <AiOutlineSearch style={{ marginLeft: "10px" }} size="25px" color={theme.colors.aqua.secondary} />
             <Input
               type="text"
               placeholder="Pesquisar..."
@@ -124,16 +102,22 @@ export function Blog() {
               value={search}
             />
           </Flex>
+          {authenticated && (
+            <Button
+              variant="outline"
+              color="aqua.primary"
+              borderColor="aqua.primary"
+              pos={{ base: "static", md: "absolute" }}
+              right={10}
+              mt={{ base: 4, md: 0 }}
+              onClick={onOpen}>
+              Novo Post
+            </Button>
+          )}
         </Flex>
 
         <Center w="100%">
-          {isLoading ? (
-            <Spinner size="xl" color="aqua.primary" mb="55vh" />
-          ) : postFilter.length > 0 ? (
-            renderPosts
-          ) : (
-            notFound
-          )}
+          {isLoading ? <Spinner size="xl" color="aqua.primary" mb="55vh" /> : postFilter.length > 0 ? renderPosts : notFound}
         </Center>
         <Footer />
       </Box>

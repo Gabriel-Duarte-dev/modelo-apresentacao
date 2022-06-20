@@ -43,8 +43,7 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
                   borderColor: "aqua.primary-md",
                 }}
                 color="white"
-                onClick={signOut}
-              >
+                onClick={signOut}>
                 SignOut
               </Button>
             )}

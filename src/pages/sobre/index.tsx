@@ -20,23 +20,16 @@ export function About() {
             <Img src={img} w="100%" h="100%" borderRadius={4} />
           </Box>
           <Text fontWeight="light" fontSize={16}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            pulvinar id ante pretium tincidunt. Quisque suscipit malesuada
-            lorem, ut ultricies libero tempor et. Donec et ligula ut orci
-            commodo porta vel eget dolor. Quisque tincidunt a augue id iaculis.
-            Sed nibh ex, facilisis nec dictum in, viverra tristique orci. Nullam
-            ac nisi mauris. Nam in ipsum sed erat rhoncus vestibulum non sit
-            amet enim. In aliquet justo quis sapien molestie molestie tincidunt
-            nec massa. Phasellus sodales nunc vel arcu sagittis, et cursus
-            turpis ornare. Phasellus finibus mi lacus, sit amet iaculis tellus
-            vulputate in. Mauris ullamcorper, urna ac cursus fringilla, magna
-            neque lacinia nisi, nec dapibus nibh tortor quis augue. Integer
-            porttitor ipsum sit amet diam tristique, sit amet sagittis lectus
-            cursus. Duis lobortis ullamcorper mollis. Aenean accumsan quam eu
-            odio euismod tempus. Morbi commodo, libero sed consequat dignissim,
-            lectus diam ornare nunc, a pharetra mauris lectus eget felis.
-            Quisque augue odio, maximus iaculis finibus ut, euismod sit amet
-            tellus.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit
+            malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque
+            tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci. Nullam ac nisi mauris. Nam
+            in ipsum sed erat rhoncus vestibulum non sit amet enim. In aliquet justo quis sapien molestie molestie tincidunt nec
+            massa. Phasellus sodales nunc vel arcu sagittis, et cursus turpis ornare. Phasellus finibus mi lacus, sit amet iaculis
+            tellus vulputate in. Mauris ullamcorper, urna ac cursus fringilla, magna neque lacinia nisi, nec dapibus nibh tortor
+            quis augue. Integer porttitor ipsum sit amet diam tristique, sit amet sagittis lectus cursus. Duis lobortis
+            ullamcorper mollis. Aenean accumsan quam eu odio euismod tempus. Morbi commodo, libero sed consequat dignissim, lectus
+            diam ornare nunc, a pharetra mauris lectus eget felis. Quisque augue odio, maximus iaculis finibus ut, euismod sit
+            amet tellus.
           </Text>
         </VStack>
 
@@ -47,12 +40,9 @@ export function About() {
               MISSÃO
             </Text>
             <Text fontWeight="light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              pulvinar id ante pretium tincidunt. Quisque suscipit malesuada
-              lorem, ut ultricies libero tempor et. Donec et ligula ut orci
-              commodo porta vel eget dolor. Quisque tincidunt a augue id
-              iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique
-              orci.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit
+              malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque
+              tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci.
             </Text>
           </Flex>
           <Flex direction="column" align="center" maxW="350px">
@@ -61,12 +51,9 @@ export function About() {
               VISÃO
             </Text>
             <Text fontWeight="light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              pulvinar id ante pretium tincidunt. Quisque suscipit malesuada
-              lorem, ut ultricies libero tempor et. Donec et ligula ut orci
-              commodo porta vel eget dolor. Quisque tincidunt a augue id
-              iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique
-              orci.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit
+              malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque
+              tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci.
             </Text>
           </Flex>
           <Flex direction="column" align="center" maxW="350px">
@@ -75,12 +62,9 @@ export function About() {
               VALORES
             </Text>
             <Text fontWeight="light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              pulvinar id ante pretium tincidunt. Quisque suscipit malesuada
-              lorem, ut ultricies libero tempor et. Donec et ligula ut orci
-              commodo porta vel eget dolor. Quisque tincidunt a augue id
-              iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique
-              orci.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit
+              malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque
+              tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci.
             </Text>
           </Flex>
         </Flex>

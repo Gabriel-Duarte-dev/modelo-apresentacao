@@ -32,12 +32,7 @@ export function Services() {
       <Header />
       <Flex direction="column" align="center" w="100%" h="100%" mt="220px">
         {serviceDetailTypes.map((value, index) => (
-          <ServiceDetails
-            key={index}
-            img={`${value.image + (index + 1)}.jpg`}
-            description={value.description}
-            pos={index + 1}
-          />
+          <ServiceDetails key={index} img={`${value.image + (index + 1)}.jpg`} description={value.description} pos={index + 1} />
         ))}
 
         <Footer />

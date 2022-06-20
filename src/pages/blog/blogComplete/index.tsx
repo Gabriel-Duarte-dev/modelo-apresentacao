@@ -21,15 +21,10 @@ export function BlogComplete() {
             w="100%"
             maxW="1270px"
             mt="80px"
-          >
+            pl={{ base: "10px", xl: 0 }}
+            pr={{ base: "10px", xl: 0 }}>
             <Box w="100%" h="550px" mb={5} borderRadius={4}>
-              <Img
-                src={filterPost?.image}
-                w="100%"
-                h="100%"
-                objectFit="cover"
-                borderRadius={4}
-              />
+              <Img src={filterPost?.image} w="100%" h="100%" objectFit="cover" borderRadius={4} />
             </Box>
             <Heading alignSelf="flex-start" color="aqua.secondary" mb={8}>
               {filterPost?.title}

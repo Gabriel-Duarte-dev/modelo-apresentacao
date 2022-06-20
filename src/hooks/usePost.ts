@@ -1,18 +1,11 @@
 import { useState } from "react";
+import { useMutation } from "react-query";
 import { addPosts, CreatePostDTO, PostDTO } from "../services/blog";
 
 const usePost = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const handleSubmitPost = async ({ title, content, image }: CreatePostDTO) => {
-    try {
-      await addPosts({ title, content, image });
-    } catch (error: any) {
-      console.log(error.response.data.message);
-    }
-    setIsLoading(false);
-  };
+  const { mutate: handleSubmitPost, isLoading, isError } = useMutation<CreatePostDTO, Error, CreatePostDTO>(addPosts);
 
-  return { handleSubmitPost, isLoading };
+  return { handleSubmitPost, isLoading, isError };
 };
 
 export { usePost };

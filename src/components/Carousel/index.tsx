@@ -25,17 +25,10 @@ export function Carousel({ images, src }: CarouselProps) {
       }}
       navigation={true}
       modules={[Autoplay, Pagination, Navigation]}
-      className="mySwiper"
-    >
+      className="mySwiper">
       {images.map((img, index) => (
         <SwiperSlide key={index}>
-          <Img
-            src={`${src}img${index + 1}.jpg`}
-            alt={img}
-            objectFit="cover"
-            w="100%"
-            h="100%"
-          />
+          <Img src={`${src}img${index + 1}.jpg`} alt={img} objectFit="cover" w="100%" h="100%" />
         </SwiperSlide>
       ))}
     </Swiper>

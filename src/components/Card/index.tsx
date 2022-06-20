@@ -9,14 +9,7 @@ type CardProps = {
 export function Card({ src, alt, pos }: CardProps) {
   return (
     <Flex direction="column" w="330px" boxShadow="lg">
-      <Box
-        w="100%"
-        h="330px"
-        borderTopLeftRadius={7}
-        borderTopRightRadius={7}
-        pos="relative"
-        overflow="hidden"
-      >
+      <Box w="100%" h="330px" borderTopLeftRadius={7} borderTopRightRadius={7} pos="relative" overflow="hidden">
         <Img
           src={src}
           alt={alt}
@@ -33,37 +26,14 @@ export function Card({ src, alt, pos }: CardProps) {
           _hover={{ transform: "scale(1.1)" }}
         />
       </Box>
-      <Flex
-        align="center"
-        h="160px"
-        borderBottomLeftRadius={7}
-        borderBottomRightRadius={7}
-        pos="relative"
-        pl={6}
-        pr={6}
-      >
+      <Flex align="center" h="160px" borderBottomLeftRadius={7} borderBottomRightRadius={7} pos="relative" pl={6} pr={6}>
         <Text fontWeight="light" fontSize={14}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue,
-          dui non posuere imperdiet, odio nulla convallis quam, ac venenatis
-          diam neque ut erat. Vestibulum suscipit varius urna ut dignissim.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue, dui non posuere imperdiet, odio nulla convallis
+          quam, ac venenatis diam neque ut erat. Vestibulum suscipit varius urna ut dignissim.
         </Text>
 
-        <Box
-          w="2px"
-          h="70px"
-          bg="aqua.primary-md"
-          pos="absolute"
-          bottom={3}
-          left={3}
-        />
-        <Box
-          w="70px"
-          h="2px"
-          bg="aqua.primary-md"
-          pos="absolute"
-          bottom={3}
-          left={3}
-        />
+        <Box w="2px" h="70px" bg="aqua.primary-md" pos="absolute" bottom={3} left={3} />
+        <Box w="70px" h="2px" bg="aqua.primary-md" pos="absolute" bottom={3} left={3} />
       </Flex>
     </Flex>
   );

@@ -1,14 +1,4 @@
-import {
-  Button,
-  Center,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Img,
-  Input,
-  Textarea,
-} from "@chakra-ui/react";
+import { Button, Center, Flex, FormControl, FormLabel, Heading, Img, Input, Textarea } from "@chakra-ui/react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 
@@ -23,23 +13,12 @@ export function Contact() {
         justify="center"
         w="100%"
         h="100vh"
-        bg="linear-gradient(to right top, #023535, #045555, #067877, #0a9c9b, #0fc2c0);"
-      >
+        bg="linear-gradient(to right top, #023535, #045555, #067877, #0a9c9b, #0fc2c0);">
         <Flex w="100%" maxW="514px" m={{ base: "0 20px", lg: 0 }}>
           <form>
-            <Flex
-              w="100%"
-              align="center"
-              justify="center"
-              gap="14px"
-              wrap="wrap"
-            >
+            <Flex w="100%" align="center" justify="center" gap="14px" wrap="wrap">
               <Heading color="white">Entre em contato</Heading>
-              <FormControl
-                isRequired
-                w={{ base: "100%", sm: "calc(50% - 14px)" }}
-                color="white"
-              >
+              <FormControl isRequired w={{ base: "100%", sm: "calc(50% - 14px)" }} color="white">
                 <FormLabel htmlFor="name" fontWeight="light">
                   Nome
                 </FormLabel>
@@ -53,11 +32,7 @@ export function Contact() {
                   focusBorderColor="aqua.primary"
                 />
               </FormControl>
-              <FormControl
-                isRequired
-                w={{ base: "100%", sm: "50%" }}
-                color="white"
-              >
+              <FormControl isRequired w={{ base: "100%", sm: "50%" }} color="white">
                 <FormLabel htmlFor="tel" fontWeight="light">
                   Telefone
                 </FormLabel>
@@ -113,18 +88,13 @@ export function Contact() {
               }}
               color="white"
               mt="14px"
-              type="submit"
-            >
+              type="submit">
               ENVIAR
             </Button>
           </form>
         </Flex>
 
-        <Img
-          src={pessoa2}
-          ml="-80px"
-          display={{ base: "none", lg: "inherit" }}
-        />
+        <Img src={pessoa2} ml="-80px" display={{ base: "none", lg: "inherit" }} />
       </Flex>
       <Footer />
     </>

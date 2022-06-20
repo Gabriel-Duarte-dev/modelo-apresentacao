@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Circle,
-  Flex,
-  IconButton,
-  List,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Circle, Flex, IconButton, List, Text, useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../../context";
@@ -52,8 +43,7 @@ export function Header() {
       pos="fixed"
       top={0}
       left={0}
-      zIndex={2}
-    >
+      zIndex={2}>
       <Link to="/">
         <Flex align="center">
           <Circle size="80px" bg="aqua.strong-md" />
@@ -63,14 +53,7 @@ export function Header() {
         </Flex>
       </Link>
 
-      <List
-        as="nav"
-        display={{ base: "none", lg: "flex" }}
-        flexDirection="row"
-        gap={6}
-        cursor="pointer"
-        mr={4}
-      >
+      <List as="nav" display={{ base: "none", lg: "flex" }} flexDirection="row" gap={6} cursor="pointer" mr={4}>
         {Object.entries(menuItensTypes).map(([key, item], index) => (
           <ListItem key={index} menuItem={key} link={item.to} />
         ))}
@@ -80,8 +63,7 @@ export function Header() {
             size="sm"
             _hover={{ bg: "none" }}
             _active={{ bg: "aqua.primary-md", borderColor: "aqua.primary-md" }}
-            onClick={signOut}
-          >
+            onClick={signOut}>
             SignOut
           </Button>
         )}

@@ -2,7 +2,9 @@ import {
   Box,
   Button,
   Center,
+  Flex,
   FormLabel,
+  HStack,
   IconButton,
   Img,
   Input,
@@ -16,12 +18,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { BsImage } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Content } from "../../services/blog";
 import { usePost } from "../../hooks/usePost";
-import { usePosts } from "../../hooks/usePosts";
 import { AiOutlinePlus } from "react-icons/ai";
-import { IoMdTrash } from "react-icons/io";
+import { IoMdTrash, IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 
 interface AddPostModalProps {
   isOpen: boolean;
@@ -38,7 +39,6 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
   ]);
   const [imgFile, setImgFile] = useState<any>();
   const { handleSubmitPost } = usePost();
-  const { posts } = usePosts();
 
   const addContent = () => {
     setContent([...content, {} as Content]);
@@ -64,6 +64,10 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
     });
   };
 
+  const changePosition = (from: number, to: number) => {
+    content.splice(to, 0, content.splice(from, 1)[0]);
+  };
+
   const addPost = async () => {
     handleSubmitPost({
       title,
@@ -71,11 +75,24 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
       image: imgFile,
     });
 
+    handleCloseModal();
+  };
+
+  const handleCloseModal = () => {
+    setContent([
+      {
+        subtitle: "",
+        paragraph: "",
+      },
+    ]);
+
+    setImgFile(null);
+
     onClose();
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="outside">
+    <Modal isOpen={isOpen} onClose={handleCloseModal} scrollBehavior="outside" size={{ base: "full", md: "md" }}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader color="aqua.secondary" textTransform="uppercase">
@@ -92,19 +109,9 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
             alignItems="center"
             border="1px dashed #999"
             cursor="pointer"
-            mb={4}
-          >
-            {imgFile ? (
-              <Img src={imgFile} w="100%" h="100%" objectFit="cover" />
-            ) : (
-              <BsImage size="40px" color="#999" />
-            )}
-            <input
-              id="inputFile"
-              type="file"
-              hidden
-              onChange={handleFileInputChange}
-            />
+            mb={4}>
+            {imgFile ? <Img src={imgFile} w="100%" h="100%" objectFit="cover" /> : <BsImage size="40px" color="#999" />}
+            <input id="inputFile" type="file" hidden onChange={handleFileInputChange} />
           </FormLabel>
           <Input
             type="text"
@@ -126,10 +133,8 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                   right={0}
                   cursor="pointer"
                   onClick={() => {
-                    if (content.length > 1)
-                      setContent(content.filter((val, pos) => pos != index));
-                  }}
-                >
+                    if (content.length > 1) setContent(content.filter((val, pos) => pos != index));
+                  }}>
                   <IoMdTrash color="#888" size="18px" cursor="pointer" />
                 </Box>
                 <Input
@@ -150,7 +155,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                 <Textarea
                   placeholder="Parágrafo"
                   focusBorderColor="aqua.primary"
-                  mb={4}
+                  mb={2}
                   onChange={(e) => {
                     const newContent = [...content];
                     content[index].paragraph = e.target.value;
@@ -158,19 +163,19 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                   }}
                   value={value.paragraph}
                 />
+                <HStack mb={4}>
+                  <IoMdArrowDropup size="20px" cursor="pointer" color="#777" onClick={() => changePosition(index, index - 1)} />
+                  <IoMdArrowDropdown size="20px" cursor="pointer" color="#777" onClick={() => changePosition(index, index + 1)} />
+                </HStack>
               </Box>
             ))}
           </Box>
           <Center w="100%">
-            <IconButton
-              aria-label="Button add content"
-              icon={<AiOutlinePlus />}
-              onClick={addContent}
-            />
+            <IconButton aria-label="Button add content" icon={<AiOutlinePlus />} onClick={addContent} />
           </Center>
         </ModalBody>
         <ModalFooter>
-          <Button variant="ghost" colorScheme="gray" mr={2} onClick={onClose}>
+          <Button variant="ghost" colorScheme="gray" mr={2} onClick={handleCloseModal}>
             Cancelar
           </Button>
           <Button
@@ -178,8 +183,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
             bg="aqua.primary"
             _hover={{ bg: "aqua.primary-md" }}
             _active={{ bg: "aqua.secondary" }}
-            onClick={addPost}
-          >
+            onClick={addPost}>
             CRIAR
           </Button>
         </ModalFooter>

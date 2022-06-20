@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainContext from "../context";
@@ -8,6 +9,7 @@ const useSignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setUser, setAuthenticated } = useContext(MainContext);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const onSubmit = async ({ email, password }: LoginInputDTO, e: FormEvent) => {
     e.preventDefault();
@@ -27,7 +29,15 @@ const useSignIn = () => {
       setIsLoading(false);
       navigate("/");
     } catch (error: any) {
-      console.log(error.response.data.message);
+      setIsLoading(false);
+      toast({
+        title: error.response.data.message,
+        status: "error",
+        isClosable: true,
+        variant: "left-accent",
+        position: "top-right",
+        duration: 2000,
+      });
     }
   };
 

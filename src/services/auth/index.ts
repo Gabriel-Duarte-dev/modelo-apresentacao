@@ -15,14 +15,11 @@ export type LoginOutputDTO = {
   token: string;
 };
 
-const login = async ({
-  email,
-  password,
-}: LoginInputDTO): Promise<LoginOutputDTO> => {
+const login = async ({ email, password }: LoginInputDTO): Promise<LoginOutputDTO> => {
   const { data } = await api.post("/auth/login", {
     email,
     password,
-    site: "site.modelo1",
+    site: "globalmidia.digital",
   });
 
   return data;
