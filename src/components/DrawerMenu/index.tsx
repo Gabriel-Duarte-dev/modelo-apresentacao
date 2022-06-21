@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext } from "react";
 import MainContext from "../../context";
-import { useSignOut } from "../../hooks/useSignOut";
+import { ButtonSignOut } from "../ButtonSignOut";
 import { menuItensTypes } from "../Header";
 import { ListItem } from "../ListItem";
 
@@ -21,7 +21,6 @@ interface DrawerMenuProps {
 
 export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
   const { authenticated } = useContext(MainContext);
-  const { signOut } = useSignOut();
   return (
     <Drawer isOpen={isOpen} onClose={onClose} placement="right">
       <DrawerOverlay />
@@ -33,20 +32,7 @@ export function DrawerMenu({ isOpen, onClose }: DrawerMenuProps) {
             {Object.entries(menuItensTypes).map(([key, item], index) => (
               <ListItem key={index} menuItem={key} link={item.to} />
             ))}
-            {authenticated && (
-              <Button
-                variant="outline"
-                size="sm"
-                _hover={{ bg: "none" }}
-                _active={{
-                  bg: "aqua.primary-md",
-                  borderColor: "aqua.primary-md",
-                }}
-                color="white"
-                onClick={signOut}>
-                SignOut
-              </Button>
-            )}
+            {authenticated && <ButtonSignOut />}
           </List>
         </DrawerBody>
       </DrawerContent>

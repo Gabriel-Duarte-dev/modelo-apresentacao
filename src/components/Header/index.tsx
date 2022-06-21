@@ -1,11 +1,11 @@
-import { Box, Button, Circle, Flex, IconButton, List, Text, useDisclosure } from "@chakra-ui/react";
+import { Circle, Flex, IconButton, List, Text, useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import MainContext from "../../context";
-import { useSignOut } from "../../hooks/useSignOut";
 import { DrawerMenu } from "../DrawerMenu";
 import { ListItem } from "../ListItem";
 import { HiOutlineMenu } from "react-icons/hi";
+import { ButtonSignOut } from "../ButtonSignOut";
 
 export const menuItensTypes = {
   Home: {
@@ -27,7 +27,6 @@ export const menuItensTypes = {
 
 export function Header() {
   const { authenticated } = useContext(MainContext);
-  const { signOut } = useSignOut();
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Flex
@@ -57,16 +56,7 @@ export function Header() {
         {Object.entries(menuItensTypes).map(([key, item], index) => (
           <ListItem key={index} menuItem={key} link={item.to} />
         ))}
-        {authenticated && (
-          <Button
-            variant="outline"
-            size="sm"
-            _hover={{ bg: "none" }}
-            _active={{ bg: "aqua.primary-md", borderColor: "aqua.primary-md" }}
-            onClick={signOut}>
-            SignOut
-          </Button>
-        )}
+        {authenticated && <ButtonSignOut test-id="btnSignout" />}
       </List>
 
       <IconButton

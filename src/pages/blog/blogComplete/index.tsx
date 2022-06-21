@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Img, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
+import { AddComment } from "../../../components/AddComment";
 import { Comment } from "../../../components/Comment";
 import { Footer } from "../../../components/Footer";
 import { Header } from "../../../components/Header";
@@ -48,7 +49,8 @@ export function BlogComplete() {
                 {`${filterPost?.comments?.length ?? 0} comentários`}
               </Text>
 
-              <Comment />
+              <AddComment />
+              {/* <Comment /> */}
             </Box>
           </Flex>
         </Flex>
