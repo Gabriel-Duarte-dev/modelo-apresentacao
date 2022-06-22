@@ -60,7 +60,6 @@ export function Blog() {
   );
 
   const handleCloseModal = () => {
-    refetch();
     onClose();
   };
 

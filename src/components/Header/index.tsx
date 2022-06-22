@@ -56,7 +56,7 @@ export function Header() {
         {Object.entries(menuItensTypes).map(([key, item], index) => (
           <ListItem key={index} menuItem={key} link={item.to} />
         ))}
-        {authenticated && <ButtonSignOut test-id="btnSignout" />}
+        {authenticated && <ButtonSignOut data-testid="btnSignout" />}
       </List>
 
       <IconButton

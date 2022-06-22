@@ -1,14 +1,15 @@
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { GoogleAuthProvider, getAuth, signInWithPopup, User } from "firebase/auth";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { app } from "../config/firebase";
 
 interface FirebaseContextProps {
   signed: boolean;
-  googleUser: object | null;
+  googleUser: User | null;
   isLoading: boolean;
   isError: boolean;
   googleSignIn(): void;
+  googleSignOut(): void;
 }
 
 const FirebaseContext = createContext<FirebaseContextProps>({} as FirebaseContextProps);
@@ -21,7 +22,13 @@ const provider = new GoogleAuthProvider();
 
 export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
   const auth = getAuth(app);
-  const [googleUser, setGoogleUser] = useState<object | null>(null);
+  const [googleUser, setGoogleUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const storageGoogleUser = localStorage.getItem("googleUser");
+
+    if (storageGoogleUser) setGoogleUser(JSON.parse(storageGoogleUser));
+  }, []);
 
   const {
     mutate: googleSignIn,
@@ -31,14 +38,20 @@ export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
     onSuccess: (data) => {
       console.log(data);
       setGoogleUser(data.user);
+      localStorage.setItem("googleUser", JSON.stringify(data.user));
     },
     onError: (error) => {
-      console.log(error);
+      console.log("firebase error:", error);
     },
   });
 
+  const googleSignOut = () => {
+    setGoogleUser(null);
+    localStorage.removeItem("googleUser");
+  };
+
   return (
-    <FirebaseContext.Provider value={{ signed: !!googleUser, googleUser, googleSignIn, isLoading, isError }}>
+    <FirebaseContext.Provider value={{ signed: !!googleUser, googleUser, googleSignIn, isLoading, isError, googleSignOut }}>
       {children}
     </FirebaseContext.Provider>
   );

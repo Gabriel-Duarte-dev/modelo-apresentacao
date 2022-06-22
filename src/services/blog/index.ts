@@ -1,14 +1,19 @@
 import { api } from "../api";
 
+export type CreatePostDTO = {
+  title: string;
+  content: Content[];
+  image: any;
+};
+
 export interface PostDTO {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
   title: string;
   content: Content[];
   image: string;
   userId: string;
-  comments?: Comments[];
+  comments?: CommentOutput[];
 }
 
 export type Content = {
@@ -17,27 +22,29 @@ export type Content = {
   paragraph: string;
 };
 
-export type Comments = {
+export interface CommentDTO {
+  user: string;
+  userImg: string;
+  comment: string;
+  blogId: string;
+}
+
+export type CommentOutput = {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  user: string;
+  userImg: string;
   comment: string;
   blogId: string;
 };
 
-export type CreatePostDTO = {
-  title: string;
-  content: Content[];
-  image: any;
-};
-
-const getPosts = async () => {
+const getPosts = async (): Promise<PostDTO[]> => {
   const { data } = await api.get("/blog/posts/globalmidia.digital");
 
   return data;
 };
 
-const addPosts = async ({ title, content, image }: CreatePostDTO) => {
+const addPosts = async ({ title, content, image }: CreatePostDTO): Promise<PostDTO> => {
   const { data } = await api.post("/blog/newPost", {
     title,
     content,
@@ -47,4 +54,21 @@ const addPosts = async ({ title, content, image }: CreatePostDTO) => {
   return data;
 };
 
-export { getPosts, addPosts };
+const addComment = async ({ user, userImg, comment, blogId }: CommentDTO): Promise<CommentOutput> => {
+  const { data } = await api.post("/comment/newComment", {
+    user,
+    userImg,
+    comment,
+    blogId,
+  });
+
+  return data;
+};
+
+const listComment = async (blogId: string): Promise<CommentOutput[]> => {
+  const { data } = await api.get(`/comment/${blogId}`);
+
+  return data;
+};
+
+export { getPosts, addPosts, addComment, listComment };

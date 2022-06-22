@@ -3,16 +3,18 @@ import { motion } from "framer-motion";
 import { BiMessage } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { useComments } from "../../hooks/useComments";
 
 interface PostProps {
   id: string;
   title: string;
   description: string;
-  dateHour: string;
+  dateHour: Date;
   image: string;
 }
 
 export function Post({ id, title, description, dateHour, image }: PostProps) {
+  const { comments } = useComments(id);
   const navigate = useNavigate();
   const MotionFlex = motion(Flex);
 
@@ -43,12 +45,12 @@ export function Post({ id, title, description, dateHour, image }: PostProps) {
         <HStack align="center">
           <Box pos="relative" mr={4}>
             <Text as="span" fontSize={14} ml="5px" color="#7c7c7c" pos="absolute" top="-18px" right="-5px">
-              8
+              {comments?.length ?? 0}
             </Text>
             <BiMessage color="#7c7c7c" size="24px" />
           </Box>
           <Text fontWeight="light" fontSize={14} color="#7c7c7c">
-            {dateHour.split("T")[0].split("-").reverse().join("/")}
+            {new Date(dateHour).toLocaleDateString()}
           </Text>
         </HStack>
         <Button
