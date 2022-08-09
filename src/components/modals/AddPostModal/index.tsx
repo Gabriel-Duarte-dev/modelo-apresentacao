@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Center,
-  Flex,
   FormLabel,
   HStack,
   IconButton,
@@ -18,11 +17,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { BsImage } from "react-icons/bs";
-import { useState } from "react";
-import { Content } from "../../services/blog";
-import { usePost } from "../../hooks/usePost";
+import { useContext, useState } from "react";
+import { Content } from "../../../Interfaces/blog";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoMdTrash, IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+import MainContext from "../../../context";
 
 interface AddPostModalProps {
   isOpen: boolean;
@@ -38,7 +37,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
     },
   ]);
   const [imgFile, setImgFile] = useState<any>();
-  const { handleSubmitPost } = usePost();
+  const { addPost } = useContext(MainContext);
 
   const addContent = () => {
     setContent([...content, {} as Content]);
@@ -68,8 +67,10 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
     content.splice(to, 0, content.splice(from, 1)[0]);
   };
 
-  const addPost = async () => {
-    handleSubmitPost({
+  const handleAddPost = () => {
+    addPost({
+      id: Math.random().toString().replace("0.", ""),
+      createdAt: new Date(),
       title,
       content,
       image: imgFile,
@@ -175,7 +176,7 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
           </Center>
         </ModalBody>
         <ModalFooter>
-          <Button variant="ghost" colorScheme="gray" mr={2} onClick={handleCloseModal}>
+          <Button variant="ghost" colorScheme="gray" color="gray.500" mr={2} onClick={handleCloseModal}>
             Cancelar
           </Button>
           <Button
@@ -183,8 +184,8 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
             bg="aqua.primary"
             _hover={{ bg: "aqua.primary-md" }}
             _active={{ bg: "aqua.secondary" }}
-            onClick={addPost}>
-            CRIAR
+            onClick={handleAddPost}>
+            Adicionar
           </Button>
         </ModalFooter>
       </ModalContent>

@@ -1,47 +1,99 @@
 import React, { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
-import { api } from "../services/api";
-import { UserDTO } from "../services/auth";
+import { CommentDTO, PostDTO, postsPreview } from "../Interfaces/blog";
+import { IServices, serviceDetailTypes } from "../Interfaces/servicos";
+import { ABOUT_PREVIEW, ISobre } from "../Interfaces/sobre";
 
 interface MainContextPros {
-  user: UserDTO | null;
-  setUser: Dispatch<SetStateAction<UserDTO | null>>;
-  authenticated: boolean;
-  setAuthenticated: Dispatch<SetStateAction<boolean>>;
+  admin: boolean;
+  changeAccess: (access: string) => void;
+  posts: PostDTO[] | null;
+  addPost: (post: PostDTO) => void;
+  comments: CommentDTO[] | [];
+  addComment: (comment: CommentDTO) => void;
+  services: IServices[];
+  addService: (service: IServices) => void;
+  editService: (pos: number, service: IServices) => void;
+  changeServicePosition: (from: number, to: number) => void;
+  about: ISobre;
+  editAbout: (about: ISobre) => void;
 }
 
 type MainContextProviderProps = {
   children: ReactNode;
 };
 
-const DEFAULT_VALUE = {
-  user: null,
-  setUser: () => {},
-  authenticated: false,
-  setAuthenticated: () => {},
-};
-
-const MainContext = createContext<MainContextPros>(DEFAULT_VALUE);
+const MainContext = createContext<MainContextPros>({} as MainContextPros);
 
 const MainContextProvider = ({ children }: MainContextProviderProps) => {
-  const [user, setUser] = useState<UserDTO | null>(null);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [posts, setPosts] = useState<PostDTO[] | null>(postsPreview);
+  const [comments, setComments] = useState<CommentDTO[] | []>([]);
+  const [services, setServices] = useState<IServices[]>(serviceDetailTypes);
+  const [about, setAbout] = useState<ISobre>(ABOUT_PREVIEW);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userStorage = localStorage.getItem("user");
+  const changeAccess = (access: string) => {
+    setAdmin(access === "admin");
+  };
 
-    if (token && userStorage) {
-      setAuthenticated(true);
-      setUser(JSON.parse(userStorage));
-      api.interceptors.request.use(async (req) => {
-        if (req.headers) {
-          req.headers.Authorization = `Bearer ${token}`;
-        }
-        return req;
-      });
+  const addPost = (post: PostDTO) => {
+    if (!posts) {
+      setPosts([post]);
+    } else {
+      setPosts([...posts, post]);
     }
-  }, []);
-  return <MainContext.Provider value={{ user, setUser, authenticated, setAuthenticated }}>{children}</MainContext.Provider>;
+  };
+
+  const addComment = (comment: CommentDTO) => {
+    if (!comments) {
+      setComments([comment]);
+    } else {
+      setComments([...comments, comment]);
+    }
+  };
+
+  const addService = (service: IServices) => {
+    if (!services) {
+      setServices([service]);
+    } else {
+      setServices([...services, service]);
+    }
+  };
+
+  const editService = (pos: number, service: IServices) => {
+    services[pos] = service;
+    setServices([...services]);
+  };
+
+  const changeServicePosition = (from: number, to: number) => {
+    const newServices = [...services];
+    newServices.splice(to, 0, newServices.splice(from, 1)[0]);
+
+    setServices(newServices);
+  };
+
+  const editAbout = (about: ISobre) => {
+    setAbout(about);
+  };
+
+  return (
+    <MainContext.Provider
+      value={{
+        admin,
+        changeAccess,
+        posts,
+        addPost,
+        comments,
+        addComment,
+        services,
+        addService,
+        editService,
+        changeServicePosition,
+        about,
+        editAbout,
+      }}>
+      {children}
+    </MainContext.Provider>
+  );
 };
 
 export { MainContextProvider };

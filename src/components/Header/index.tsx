@@ -1,11 +1,11 @@
-import { Circle, Flex, IconButton, List, Text, useDisclosure } from "@chakra-ui/react";
-import { useContext } from "react";
+import { Circle, Flex, IconButton, List, Menu, MenuButton, MenuItem, MenuList, Text, useDisclosure } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import MainContext from "../../context";
-import { DrawerMenu } from "../DrawerMenu";
 import { ListItem } from "../ListItem";
 import { HiOutlineMenu } from "react-icons/hi";
-import { ButtonSignOut } from "../ButtonSignOut";
+import { MdAdminPanelSettings } from "react-icons/md";
+import { DrawerMenu } from "../DrawerMenu";
+import { useContext } from "react";
+import MainContext from "../../context";
 
 export const menuItensTypes = {
   Home: {
@@ -26,7 +26,7 @@ export const menuItensTypes = {
 };
 
 export function Header() {
-  const { authenticated } = useContext(MainContext);
+  const { changeAccess } = useContext(MainContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Flex
@@ -52,11 +52,34 @@ export function Header() {
         </Flex>
       </Link>
 
-      <List as="nav" display={{ base: "none", lg: "flex" }} flexDirection="row" gap={6} cursor="pointer" mr={4}>
-        {Object.entries(menuItensTypes).map(([key, item], index) => (
-          <ListItem key={index} menuItem={key} link={item.to} />
+      <List
+        as="nav"
+        display={{ base: "none", lg: "flex" }}
+        flexDirection="row"
+        alignItems="center"
+        gap={6}
+        cursor="pointer"
+        mr={4}>
+        {Object.entries(menuItensTypes).map(([key, { to }], index) => (
+          <ListItem key={index} menuItem={key} link={to} />
         ))}
-        {authenticated && <ButtonSignOut data-testid="btnSignout" />}
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            icon={<MdAdminPanelSettings color="white" size={26} cursor="pointer" />}
+            bg="none"
+            _hover={{ bg: "none", borderWidth: "1px", boderColor: "white" }}
+            _expanded={{ bg: "rgba(255,255,255,0.3)" }}
+          />
+          <MenuList>
+            <MenuItem color="gray.500" onClick={() => changeAccess("admin")}>
+              Visão do administrador
+            </MenuItem>
+            <MenuItem color="gray.500" onClick={() => changeAccess("user")}>
+              Visão do usuário
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </List>
 
       <IconButton

@@ -4,16 +4,14 @@ import { Header } from "../../components/Header";
 import { AiOutlineSearch } from "react-icons/ai";
 import { theme } from "../../styles/theme";
 import { Post } from "../../components/Post";
-import { usePosts } from "../../hooks/usePosts";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { AddPostModal } from "../../components/AddPostModal";
+import { useContext, useMemo, useState } from "react";
+import { AddPostModal } from "../../components/modals/AddPostModal";
 import MainContext from "../../context";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export function Blog() {
   const [search, setSearch] = useState("");
-  const { authenticated } = useContext(MainContext);
-  const { posts, isLoading, refetch } = usePosts();
+  const { admin, posts } = useContext(MainContext);
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const postFilter = useMemo(() => {
@@ -63,16 +61,15 @@ export function Blog() {
     onClose();
   };
 
-  useEffect(() => {
-    refetch();
-  }, [handleCloseModal]);
   return (
     <>
       <Header />
       <Box w="100%" h="calc(100% - 100px)" mt="100px" pos="relative">
-        <ScaleFade in={isOpen}>
-          <AddPostModal isOpen={isOpen} onClose={handleCloseModal} />
-        </ScaleFade>
+        {admin && (
+          <ScaleFade in={isOpen}>
+            <AddPostModal isOpen={isOpen} onClose={handleCloseModal} />
+          </ScaleFade>
+        )}
 
         <Flex
           direction={{ base: "column", md: "row" }}
@@ -101,7 +98,7 @@ export function Blog() {
               value={search}
             />
           </Flex>
-          {authenticated && (
+          {admin && (
             <Button
               variant="outline"
               color="aqua.primary"
@@ -115,9 +112,7 @@ export function Blog() {
           )}
         </Flex>
 
-        <Center w="100%">
-          {isLoading ? <Spinner size="xl" color="aqua.primary" mb="55vh" /> : postFilter.length > 0 ? renderPosts : notFound}
-        </Center>
+        <Center w="100%">{postFilter.length > 0 ? renderPosts : notFound}</Center>
         <Footer />
       </Box>
     </>

@@ -1,24 +1,23 @@
 import { Box, Flex, Heading, Img, Spinner, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AddComment } from "../../../components/AddComment";
 import { Comment } from "../../../components/Comment";
 import { Footer } from "../../../components/Footer";
 import { Header } from "../../../components/Header";
-import { useComment } from "../../../hooks/useComment";
-import { useComments } from "../../../hooks/useComments";
-import { usePosts } from "../../../hooks/usePosts";
+import MainContext from "../../../context";
 
 export function BlogComplete() {
   const { blogId } = useParams();
-  const { comments, isLoading, refetch } = useComments(blogId ?? "");
-  const { handleSubmitComment } = useComment();
-  const { posts } = usePosts();
+  const { posts, comments, addComment } = useContext(MainContext);
   const filterPost = posts?.filter((value) => value.id == blogId)[0];
+  const commentsFilter = comments?.filter((value) => value.blogId == blogId);
 
-  const addComment = (user: string, userImg: string, comment: string) => {
+  const handleAddComment = (user: string, userImg: string, comment: string) => {
     if (blogId) {
-      handleSubmitComment({
+      addComment({
+        id: Math.random().toString().replace("0.", ""),
+        createdAt: new Date(),
         user,
         userImg,
         comment,
@@ -26,10 +25,6 @@ export function BlogComplete() {
       });
     }
   };
-
-  useEffect(() => {
-    refetch();
-  }, [addComment]);
 
   return (
     <>
@@ -66,17 +61,13 @@ export function BlogComplete() {
             </Box>
             <Box w="100%" alignSelf="flex-start" mb={80} mt={20}>
               <Text fontWeight="bold" fontSize={16} mb={20}>
-                {`${comments?.length} comentários`}
+                {`${commentsFilter?.length} comentários`}
               </Text>
 
-              {isLoading ? (
-                <Spinner />
-              ) : (
-                comments?.map((comment) => (
-                  <Comment key={comment.id} userImg={comment.userImg} comment={comment.comment} date={comment.createdAt} />
-                ))
-              )}
-              <AddComment addComment={addComment} />
+              {commentsFilter?.map((comment) => (
+                <Comment key={comment.id} userImg={comment.userImg} comment={comment.comment} date={comment.createdAt} />
+              ))}
+              <AddComment addComment={handleAddComment} />
             </Box>
           </Flex>
         </Flex>

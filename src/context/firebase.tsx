@@ -24,21 +24,13 @@ export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
   const auth = getAuth(app);
   const [googleUser, setGoogleUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    const storageGoogleUser = localStorage.getItem("googleUser");
-
-    if (storageGoogleUser) setGoogleUser(JSON.parse(storageGoogleUser));
-  }, []);
-
   const {
     mutate: googleSignIn,
     isLoading,
     isError,
-  } = useMutation(async () => signInWithPopup(auth, provider), {
+  } = useMutation(async () => await signInWithPopup(auth, provider), {
     onSuccess: (data) => {
-      console.log(data);
       setGoogleUser(data.user);
-      localStorage.setItem("googleUser", JSON.stringify(data.user));
     },
     onError: (error) => {
       console.log("firebase error:", error);
@@ -47,7 +39,6 @@ export const FirebaseProvider = ({ children }: FirebaseProviderProps) => {
 
   const googleSignOut = () => {
     setGoogleUser(null);
-    localStorage.removeItem("googleUser");
   };
 
   return (

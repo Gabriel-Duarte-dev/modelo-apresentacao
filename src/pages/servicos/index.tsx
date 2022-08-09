@@ -1,42 +1,62 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { useCallback, useContext, useMemo, useState } from "react";
+import { Box, Button, Center, Flex, ScaleFade, useDisclosure } from "@chakra-ui/react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { ServiceDetails } from "../../components/ServiceDetails";
-
-export const serviceDetailTypes = [
-  {
-    image: "../../../images/img",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci. Nullam ac nisi mauris. Nam in ipsum sed erat rhoncus vestibulum non sit amet enim. In aliquet justo quis sapien molestie molestie tincidunt nec massa. Phasellus sodales nunc vel arcu sagittis, et cursus turpis ornare. Phasellus finibus mi lacus, sit amet iaculis tellus vulputate in. Mauris ullamcorper, urna ac cursus fringilla, magna neque lacinia nisi, nec dapibus nibh tortor quis augue. Integer porttitor ipsum sit amet diam tristique, sit amet sagittis lectus cursus. Duis lobortis ullamcorper mollis. Aenean accumsan quam eu odio euismod tempus.",
-  },
-  {
-    image: "../../../images/img",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci. Nullam ac nisi mauris. Nam in ipsum sed erat rhoncus vestibulum non sit amet enim. In aliquet justo quis sapien molestie molestie tincidunt nec massa. Phasellus sodales nunc vel arcu sagittis, et cursus turpis ornare. Phasellus finibus mi lacus, sit amet iaculis tellus vulputate in. Mauris ullamcorper, urna ac cursus fringilla, magna neque lacinia nisi, nec dapibus nibh tortor quis augue. Integer porttitor ipsum sit amet diam tristique, sit amet sagittis lectus cursus. Duis lobortis ullamcorper mollis. Aenean accumsan quam eu odio euismod tempus.",
-  },
-  {
-    image: "../../../images/img",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci. Nullam ac nisi mauris. Nam in ipsum sed erat rhoncus vestibulum non sit amet enim. In aliquet justo quis sapien molestie molestie tincidunt nec massa. Phasellus sodales nunc vel arcu sagittis, et cursus turpis ornare. Phasellus finibus mi lacus, sit amet iaculis tellus vulputate in. Mauris ullamcorper, urna ac cursus fringilla, magna neque lacinia nisi, nec dapibus nibh tortor quis augue. Integer porttitor ipsum sit amet diam tristique, sit amet sagittis lectus cursus. Duis lobortis ullamcorper mollis. Aenean accumsan quam eu odio euismod tempus.",
-  },
-  {
-    image: "../../../images/img",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pulvinar id ante pretium tincidunt. Quisque suscipit malesuada lorem, ut ultricies libero tempor et. Donec et ligula ut orci commodo porta vel eget dolor. Quisque tincidunt a augue id iaculis. Sed nibh ex, facilisis nec dictum in, viverra tristique orci. Nullam ac nisi mauris. Nam in ipsum sed erat rhoncus vestibulum non sit amet enim. In aliquet justo quis sapien molestie molestie tincidunt nec massa. Phasellus sodales nunc vel arcu sagittis, et cursus turpis ornare. Phasellus finibus mi lacus, sit amet iaculis tellus vulputate in. Mauris ullamcorper, urna ac cursus fringilla, magna neque lacinia nisi, nec dapibus nibh tortor quis augue. Integer porttitor ipsum sit amet diam tristique, sit amet sagittis lectus cursus. Duis lobortis ullamcorper mollis. Aenean accumsan quam eu odio euismod tempus.",
-  },
-];
+import { TbLock, TbLockOpen } from "react-icons/tb";
+import MainContext from "../../context";
+import { AddServiceModal } from "../../components/modals/AddServiceModal";
 
 export function Services() {
+  const { admin, services } = useContext(MainContext);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [edit, setEdit] = useState(false);
+
+  const renderServices = useMemo(
+    () =>
+      services.map((value, index) => (
+        <ServiceDetails
+          key={index}
+          img={value.image}
+          title={value.title}
+          description={value.description}
+          pos={index}
+          edit={edit}
+        />
+      )),
+    [services, edit],
+  );
   return (
     <>
       <Header />
-      <Flex direction="column" align="center" w="100%" h="100%" mt="220px">
-        {serviceDetailTypes.map((value, index) => (
-          <ServiceDetails key={index} img={`${value.image + (index + 1)}.jpg`} description={value.description} pos={index + 1} />
-        ))}
-
-        <Footer />
-      </Flex>
+      <Box w="100%" mt="100px" pos="relative" textAlign="center">
+        {admin && (
+          <>
+            <ScaleFade in={isOpen}>
+              <AddServiceModal isOpen={isOpen} onClose={onClose} />
+            </ScaleFade>
+            <Center margin="50px 0" gap={2} mt="150px">
+              <Button
+                variant="outline"
+                color="aqua.primary"
+                borderColor="aqua.primary"
+                rightIcon={edit ? <TbLockOpen /> : <TbLock />}
+                onClick={() => setEdit(!edit)}>
+                Editar
+              </Button>
+              {edit && (
+                <Button variant="outline" color="aqua.primary" borderColor="aqua.primary" onClick={onOpen}>
+                  Novo Serviço
+                </Button>
+              )}
+            </Center>
+          </>
+        )}
+        <Flex direction="column" align="center" w="100%" mt={!admin ? "150px" : 0}>
+          {renderServices}
+          <Footer />
+        </Flex>
+      </Box>
     </>
   );
 }

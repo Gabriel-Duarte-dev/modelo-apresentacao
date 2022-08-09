@@ -1,9 +1,10 @@
 import { Box, Button, Flex, Heading, HStack, Img, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { useContext } from "react";
 import { BiMessage } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useComments } from "../../hooks/useComments";
+import MainContext from "../../context";
 
 interface PostProps {
   id: string;
@@ -14,7 +15,8 @@ interface PostProps {
 }
 
 export function Post({ id, title, description, dateHour, image }: PostProps) {
-  const { comments } = useComments(id);
+  const { comments } = useContext(MainContext);
+  const commentsFilter = comments?.filter((value) => value.blogId == id);
   const navigate = useNavigate();
   const MotionFlex = motion(Flex);
 
@@ -45,7 +47,7 @@ export function Post({ id, title, description, dateHour, image }: PostProps) {
         <HStack align="center">
           <Box pos="relative" mr={4}>
             <Text as="span" fontSize={14} ml="5px" color="#7c7c7c" pos="absolute" top="-18px" right="-5px">
-              {comments?.length ?? 0}
+              {commentsFilter?.length ?? 0}
             </Text>
             <BiMessage color="#7c7c7c" size="24px" />
           </Box>
