@@ -6,7 +6,6 @@ import {
   HStack,
   IconButton,
   Img,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,7 +13,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Textarea,
 } from "@chakra-ui/react";
 import { BsImage } from "react-icons/bs";
 import { useContext, useState } from "react";
@@ -22,6 +20,8 @@ import { Content } from "../../../Interfaces/blog";
 import { AiOutlinePlus } from "react-icons/ai";
 import { IoMdTrash, IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 import MainContext from "../../../context";
+import { Textfield } from "../../Textfield";
+import { Textarea } from "../../Textarea";
 
 interface AddPostModalProps {
   isOpen: boolean;
@@ -114,11 +114,10 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
             {imgFile ? <Img src={imgFile} w="100%" h="100%" objectFit="cover" /> : <BsImage size="40px" color="#999" />}
             <input id="inputFile" type="file" hidden onChange={handleFileInputChange} />
           </FormLabel>
-          <Input
+          <Textfield
             type="text"
             placeholder="Título do post"
             variant="flushed"
-            focusBorderColor="aqua.primary"
             bg="none"
             mb={4}
             onChange={(e) => setTitle(e.target.value)}
@@ -138,11 +137,10 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                   }}>
                   <IoMdTrash color="#888" size="18px" cursor="pointer" />
                 </Box>
-                <Input
+                <Textfield
                   type="text"
                   placeholder="Subtítulo (opcional)"
                   variant="flushed"
-                  focusBorderColor="aqua.primary"
                   bg="none"
                   mb={4}
                   mt="10px"
@@ -155,7 +153,6 @@ export function AddPostModal({ isOpen, onClose }: AddPostModalProps) {
                 />
                 <Textarea
                   placeholder="Parágrafo"
-                  focusBorderColor="aqua.primary"
                   mb={2}
                   onChange={(e) => {
                     const newContent = [...content];

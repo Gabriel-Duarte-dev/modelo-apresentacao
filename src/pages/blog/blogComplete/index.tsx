@@ -1,5 +1,5 @@
-import { Box, Flex, Heading, Img, Spinner, Text } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { Box, Flex, Heading, Img, Text } from "@chakra-ui/react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AddComment } from "../../../components/AddComment";
 import { Comment } from "../../../components/Comment";

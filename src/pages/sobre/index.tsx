@@ -1,17 +1,4 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Img,
-  VStack,
-  Text,
-  Input,
-  HStack,
-  Button,
-  useDisclosure,
-  FormLabel,
-  Textarea,
-} from "@chakra-ui/react";
+import { Flex, Heading, Img, VStack, Text, Input, HStack, Button, useDisclosure, FormLabel } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
@@ -21,6 +8,7 @@ import MainContext from "../../context";
 import missionIcon from "../../../images/missionIcon.svg";
 import visionIcon from "../../../images/visionIcon.svg";
 import valuesIcon from "../../../images/valuesIcon.svg";
+import { Textarea } from "../../components/Textarea";
 
 export function About() {
   const { isOpen, onClose, onOpen } = useDisclosure();

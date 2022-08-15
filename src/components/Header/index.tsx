@@ -42,7 +42,7 @@ export function Header() {
       pos="fixed"
       top={0}
       left={0}
-      zIndex={2}>
+      zIndex={3}>
       <Link to="/">
         <Flex align="center">
           <Circle size="80px" bg="aqua.strong-md" />

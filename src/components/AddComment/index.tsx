@@ -1,10 +1,11 @@
-import { Box, Button, Flex, IconButton, Img, Text, Textarea } from "@chakra-ui/react";
+import { Box, Button, Flex, IconButton, Img } from "@chakra-ui/react";
 import { useFirebaseAuth } from "../../context/firebase";
 import { IoIosSend } from "react-icons/io";
 import { FaSignOutAlt } from "react-icons/fa";
 
 import img4 from "../../../images/img4.jpg";
 import { useState } from "react";
+import { Textarea } from "../Textarea";
 
 interface AddCommentProps {
   addComment: (user: string, userImg: string, comment: string) => void;
@@ -36,7 +37,6 @@ export function AddComment({ addComment }: AddCommentProps) {
           borderColor="transparent"
           fontWeight="light"
           fontSize={14}
-          focusBorderColor="aqua.primary"
           padding={4}
           value={comment}
           onChange={(e) => setComment(e.target.value)}

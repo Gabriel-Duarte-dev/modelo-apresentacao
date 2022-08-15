@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Img, VStack, Text, Button, useMediaQuery, FormLabel, Input, Textarea } from "@chakra-ui/react";
+import { Box, Flex, Heading, Img, VStack, Text, Button, useMediaQuery, FormLabel } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,8 @@ import { ParallaxBanner } from "react-scroll-parallax";
 import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
 
 import MainContext from "../../context";
+import { Textfield } from "../Textfield";
+import { Textarea } from "../Textarea";
 
 interface ServiceDetailsProps {
   img: any;
@@ -77,7 +79,7 @@ export function ServiceDetails({ img, title, description, pos, edit }: ServiceDe
           mb="12px"
           w="fit-content">
           {edit ? (
-            <Input
+            <Textfield
               value={title}
               color="aqua.secondary"
               fontSize="36px"
@@ -138,11 +140,6 @@ export function ServiceDetails({ img, title, description, pos, edit }: ServiceDe
               mb="10px"
               p={0}
               resize="none"
-              disabled={!edit}
-              _disabled={{
-                opacity: 1,
-                border: "none",
-              }}
               onChange={(e) => editService(pos, { image: img, title, description: e.target.value })}
             />
           ) : (

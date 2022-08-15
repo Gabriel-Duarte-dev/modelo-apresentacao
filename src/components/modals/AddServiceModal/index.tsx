@@ -5,7 +5,6 @@ import {
   Flex,
   FormLabel,
   Img,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,12 +12,13 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Textarea,
   useToast,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { BsImage, BsArrowRight } from "react-icons/bs";
 import MainContext from "../../../context";
+import { Textarea } from "../../Textarea";
+import { Textfield } from "../../Textfield";
 
 interface AddServiceModalProps {
   isOpen: boolean;
@@ -82,7 +82,7 @@ export function AddServiceModal({ isOpen, onClose }: AddServiceModalProps) {
           <Flex direction="column" align="center" h={{ base: "auto", lg: "200px" }}>
             <Box w="100%">
               <Box mb="12px" w="fit-content">
-                <Input
+                <Textfield
                   placeholder="Título..."
                   _placeholder={{ color: "gray.500", fontWeight: "light" }}
                   color="aqua.secondary"

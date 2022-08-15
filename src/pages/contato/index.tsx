@@ -1,8 +1,10 @@
-import { Button, Center, Flex, FormControl, FormLabel, Heading, Img, Input, Textarea } from "@chakra-ui/react";
+import { Button, Center, Flex, FormControl, FormLabel, Heading, Img } from "@chakra-ui/react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 
 import pessoa2 from "../../../images/pessoa2.png";
+import { Textfield } from "../../components/Textfield";
+import { Textarea } from "../../components/Textarea";
 
 export function Contact() {
   return (
@@ -22,28 +24,26 @@ export function Contact() {
                 <FormLabel htmlFor="name" fontWeight="light">
                   Nome
                 </FormLabel>
-                <Input
+                <Textfield
                   id="name"
                   name="name"
                   type="text"
                   placeholder="Nome..."
                   _placeholder={{ color: "gray.300" }}
                   borderColor="white"
-                  focusBorderColor="aqua.primary"
                 />
               </FormControl>
               <FormControl isRequired w={{ base: "100%", sm: "50%" }} color="white">
                 <FormLabel htmlFor="tel" fontWeight="light">
                   Telefone
                 </FormLabel>
-                <Input
+                <Textfield
                   id="tel"
                   name="tel"
                   type="number"
                   placeholder="Telefone..."
                   _placeholder={{ color: "gray.300" }}
                   borderColor="white"
-                  focusBorderColor="aqua.primary"
                 />
               </FormControl>
             </Flex>
@@ -51,27 +51,20 @@ export function Contact() {
               <FormLabel htmlFor="email" fontWeight="light">
                 E-mail
               </FormLabel>
-              <Input
+              <Textfield
                 id="email"
                 name="email"
                 type="email"
                 placeholder="E-mail..."
                 _placeholder={{ color: "gray.300" }}
                 borderColor="white"
-                focusBorderColor="aqua.primary"
               />
             </FormControl>
             <FormControl isRequired color="white">
               <FormLabel htmlFor="mensagem" fontWeight="light">
                 Deixe sua mensagem
               </FormLabel>
-              <Textarea
-                id="mensagem"
-                name="mensagem"
-                placeholder="Deixe sua mensagem..."
-                _placeholder={{ color: "gray.300" }}
-                focusBorderColor="aqua.primary"
-              />
+              <Textarea id="mensagem" name="mensagem" placeholder="Deixe sua mensagem..." _placeholder={{ color: "gray.300" }} />
             </FormControl>
 
             <Button

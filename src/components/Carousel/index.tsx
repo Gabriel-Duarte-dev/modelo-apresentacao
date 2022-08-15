@@ -8,11 +8,10 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import { Img } from "@chakra-ui/react";
 
 type CarouselProps = {
-  images: string[];
-  src: string;
+  images: any[];
 };
 
-export function Carousel({ images, src }: CarouselProps) {
+export function Carousel({ images }: CarouselProps) {
   return (
     <Swiper
       centeredSlides={true}
@@ -28,7 +27,7 @@ export function Carousel({ images, src }: CarouselProps) {
       className="mySwiper">
       {images.map((img, index) => (
         <SwiperSlide key={index}>
-          <Img src={`${src}img${index + 1}.jpg`} alt={img} objectFit="cover" w="100%" h="100%" />
+          <Img src={img} alt="" objectFit="cover" w="100%" h="100%" />
         </SwiperSlide>
       ))}
     </Swiper>

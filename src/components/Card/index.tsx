@@ -2,17 +2,17 @@ import { Box, Flex, Img, Text } from "@chakra-ui/react";
 
 type CardProps = {
   src: string;
-  alt: string;
+  resume: string;
   pos: number;
 };
 
-export function Card({ src, alt, pos }: CardProps) {
+export function Card({ src, resume, pos }: CardProps) {
   return (
     <Flex direction="column" w="330px" boxShadow="lg">
       <Box w="100%" h="330px" borderTopLeftRadius={7} borderTopRightRadius={7} pos="relative" overflow="hidden">
         <Img
           src={src}
-          alt={alt}
+          alt="Imagem do serviço"
           w="100%"
           h="100%"
           objectFit="cover"
@@ -28,8 +28,7 @@ export function Card({ src, alt, pos }: CardProps) {
       </Box>
       <Flex align="center" h="160px" borderBottomLeftRadius={7} borderBottomRightRadius={7} pos="relative" pl={6} pr={6}>
         <Text fontWeight="light" fontSize={14}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue, dui non posuere imperdiet, odio nulla convallis
-          quam, ac venenatis diam neque ut erat. Vestibulum suscipit varius urna ut dignissim.
+          {resume}
         </Text>
 
         <Box w="2px" h="70px" bg="aqua.primary-md" pos="absolute" bottom={3} left={3} />

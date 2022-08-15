@@ -1,10 +1,15 @@
-import React, { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import { CommentDTO, PostDTO, postsPreview } from "../Interfaces/blog";
+import { HomeContent, previewHomeContent } from "../Interfaces/home";
 import { IServices, serviceDetailTypes } from "../Interfaces/servicos";
 import { ABOUT_PREVIEW, ISobre } from "../Interfaces/sobre";
 
 interface MainContextPros {
   admin: boolean;
+  homeContent: HomeContent;
+  editImageInCarousel: (newCarousel: HomeContent[]) => void;
+  editSectionContact: (value: string) => void;
+  editSectionServices: (value: string) => void;
   changeAccess: (access: string) => void;
   posts: PostDTO[] | null;
   addPost: (post: PostDTO) => void;
@@ -25,6 +30,7 @@ type MainContextProviderProps = {
 const MainContext = createContext<MainContextPros>({} as MainContextPros);
 
 const MainContextProvider = ({ children }: MainContextProviderProps) => {
+  const [homeContent, setHomeContent] = useState<HomeContent>(previewHomeContent);
   const [admin, setAdmin] = useState(false);
   const [posts, setPosts] = useState<PostDTO[] | null>(postsPreview);
   const [comments, setComments] = useState<CommentDTO[] | []>([]);
@@ -33,6 +39,18 @@ const MainContextProvider = ({ children }: MainContextProviderProps) => {
 
   const changeAccess = (access: string) => {
     setAdmin(access === "admin");
+  };
+
+  const editImageInCarousel = (newCarousel: any[]) => {
+    setHomeContent({ ...homeContent, carouselImages: newCarousel });
+  };
+
+  const editSectionContact = (value: string) => {
+    setHomeContent({ ...homeContent, sectionContact: { description: value } });
+  };
+
+  const editSectionServices = (value: string) => {
+    setHomeContent({ ...homeContent, sectionServices: { title: value } });
   };
 
   const addPost = (post: PostDTO) => {
@@ -78,6 +96,10 @@ const MainContextProvider = ({ children }: MainContextProviderProps) => {
   return (
     <MainContext.Provider
       value={{
+        homeContent,
+        editImageInCarousel,
+        editSectionContact,
+        editSectionServices,
         admin,
         changeAccess,
         posts,
